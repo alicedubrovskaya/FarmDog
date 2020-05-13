@@ -1,25 +1,38 @@
 package controller;
 
-import model.Staff;
-import model.StaffList;
+import model.staff.*;
+import view.Feeding;
 
 import java.util.List;
 
 public class ControlStaffList {
     private StaffList staffList;
-    public ControlStaffList(StaffList staffList){
-        this.staffList=staffList;
+
+    public ControlStaffList(StaffList staffList) {
+        this.staffList = staffList;
     }
 
-    public void add(Staff staff){
-        staffList.addToStaffList(staff);
+    public void addToFeederList(Feeder feeder) {
+        staffList.addToFeederList(feeder);
     }
 
-    public List<Staff> getStaffList() {
-        return staffList.getStaffList();
+    public List<Feeder> getFeederList() {
+        return staffList.getFeederList();
     }
 
-    public String getStaffTypeOfActivity(Staff staff){
-        return staff.getTypeOfActivity();
+    public void addToCleanerList(Cleaner cleaner) {
+        staffList.addToCleanerList(cleaner);
+    }
+
+    public List<Cleaner> getCleanerList() {
+        return staffList.getCleanerList();
+    }
+
+    public void addToTrainerList(Trainer trainer) {
+        staffList.addToTrainerList(trainer);
+    }
+
+    public List<Trainer> getTrainerList() {
+        return staffList.getTrainerList();
     }
 }

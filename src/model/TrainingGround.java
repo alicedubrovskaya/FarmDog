@@ -1,14 +1,12 @@
 package model;
 
+import model.dogs.Dog;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TrainingGround {
-    private List<Dog> trainingDogs;
-
-    public TrainingGround(){
-        trainingDogs=new ArrayList<>();
-    }
+    private List<Dog> trainingDogs = new ArrayList<>();
 
     public void addToTrainingDog(Dog trainingDog) {
         trainingDogs.add(trainingDog);

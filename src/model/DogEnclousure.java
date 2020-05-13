@@ -1,19 +1,22 @@
 package model;
 
 public class DogEnclousure {
-    private boolean isEmpty; //there is no dog at this moment
+    private boolean isEmpty;
     private boolean isClear;
 
-    public DogEnclousure(boolean isClear){
-        this.isClear=isClear;
-        isEmpty=false;
+    public void setIsEmpty() {
+        this.isEmpty = true;
     }
 
-    public void setEmpty(boolean isEmpty) {
-        this.isEmpty = isEmpty;
+    public void setNotEmpty() {
+        this.isEmpty = false;
     }
 
-    public void setClear(boolean isClear) {
-        this.isClear = isClear;
+    public void setIsClear() {
+        this.isClear = true;
+    }
+
+    public void setNotClear() {
+        this.isClear = false;
     }
 }

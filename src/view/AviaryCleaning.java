@@ -2,28 +2,32 @@ package view;
 
 import controller.ControlDogList;
 import controller.ControlStaffList;
-import service.StaffService;
-import model.Dog;
-import model.Staff;
+import model.dogs.Dog;
+import model.staff.Cleaner;
+import model.staff.Staff;
 
 public class AviaryCleaning {
-    ControlDogList controlDogList;
-    ControlStaffList controlStaffList;
+    private ControlDogList controlDogList;
+    private ControlStaffList controlStaffList;
 
-    public AviaryCleaning(ControlDogList controlDogList, ControlStaffList controlStaffList){
-        this.controlDogList=controlDogList;
-        this.controlStaffList=controlStaffList;
+    public AviaryCleaning(ControlDogList controlDogList, ControlStaffList controlStaffList) {
+        this.controlDogList = controlDogList;
+        this.controlStaffList = controlStaffList;
     }
 
-    public void cleanAviaries(){
-        Staff cleaner = null;
-        for (Staff staff: controlStaffList.getStaffList()){
-            if (controlStaffList.getStaffTypeOfActivity(staff).equals("cleaner")){
-                cleaner=staff;
-            }
+    public void cleanAviaries() {
+        Staff staff = null;
+        for (Cleaner cleaner : controlStaffList.getCleanerList()) {
+            staff = cleaner;
         }
-        for (Dog dog: controlDogList.getDogList()){
-            StaffService.clean(dog, cleaner);
+        for (Dog dog : controlDogList.getPuppyList()) {
+            staff.works(dog);
+        }
+        for (Dog dog : controlDogList.getAdultDogList()) {
+            staff.works(dog);
+        }
+        for (Dog dog : controlDogList.getElderlyDogList()) {
+            staff.works(dog);
         }
     }
 }

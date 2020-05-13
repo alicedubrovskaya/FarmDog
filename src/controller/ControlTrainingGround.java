@@ -1,6 +1,6 @@
 package controller;
 
-import model.Dog;
+import model.dogs.Dog;
 import model.TrainingGround;
 
 import java.util.List;
@@ -8,18 +8,19 @@ import java.util.List;
 public class ControlTrainingGround {
     private TrainingGround trainingGround;
 
-    public ControlTrainingGround(TrainingGround trainingGround){
-        this.trainingGround=trainingGround;
+    public ControlTrainingGround(TrainingGround trainingGround) {
+        this.trainingGround = trainingGround;
     }
 
     public List<Dog> getTrainingGroundDogs() {
         return trainingGround.getTrainingDogs();
     }
 
-    public void add(Dog dog){
+    public void add(Dog dog) {
         trainingGround.addToTrainingDog(dog);
     }
-    public void clear(){
+
+    public void clear() {
         trainingGround.clearTrainingDogs();
     }
 }

@@ -4,63 +4,75 @@ import controller.ControlDogList;
 import controller.ControlStaffList;
 import controller.ControlTrainingGround;
 import controller.ControlVeterinarian;
-import model.Dog;
+import model.dogs.AdultDog;
+import model.dogs.Dog;
 import model.DogEnclousure;
-import model.Staff;
+import model.dogs.ElderlyDog;
+import model.dogs.Puppy;
+import model.staff.Cleaner;
+import model.staff.Feeder;
+import model.staff.Trainer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NewDay {
-    ControlDogList controlDogList;
-    ControlStaffList controlStaffList;
-    ControlTrainingGround controlTrainingGround;
-    ControlVeterinarian controlVeterinarian;
-    private List<Dog> dogs=new ArrayList<>();
 
-
+    private ControlDogList controlDogList;
+    private ControlStaffList controlStaffList;
+    private ControlTrainingGround controlTrainingGround;
+    private ControlVeterinarian controlVeterinarian;
 
     public NewDay(ControlDogList controlDogList, ControlStaffList controlStaffList, ControlTrainingGround controlTrainingGround,
-                  ControlVeterinarian controlVeterinarian){
-        this.controlDogList=controlDogList;
-        this.controlStaffList=controlStaffList;
-        this.controlTrainingGround=controlTrainingGround;
-        this.controlVeterinarian=controlVeterinarian;
+                  ControlVeterinarian controlVeterinarian) {
+        this.controlDogList = controlDogList;
+        this.controlStaffList = controlStaffList;
+        this.controlTrainingGround = controlTrainingGround;
+        this.controlVeterinarian = controlVeterinarian;
 
         initializeDogs();
         initializeStaff();
         startNewDay();
     }
 
-    public void initializeDogs(){
-        controlDogList.add(new Dog("Charlie",10,false, false,false,
-                new DogEnclousure(false)));
-        controlDogList.add(new Dog("Coco", 3, true, false, true,
-                new DogEnclousure(false)));
-        controlDogList.add(new Dog("Molly",0.5, true, false, false,
-                new DogEnclousure(false)));
+    public void initializeDogs() {
+        controlDogList.addToPuppyList(new Puppy.Builder()
+                .withName("Molly")
+                .withAge(0.5)
+                .withDogEnclousure(new DogEnclousure())
+                .build());
+        controlDogList.addToAdultDogList(new AdultDog.Builder()
+                .withName("Coco")
+                .withAge(3)
+                .withDogEnclousure(new DogEnclousure())
+                .build());
+        controlDogList.addToElderlyDogList(new ElderlyDog.Builder()
+                .withName("Charlie")
+                .withAge(10)
+                .withDogEnclousure(new DogEnclousure())
+                .build());
     }
 
-    public void initializeStaff(){
-        controlStaffList.add(new Staff("Tom","feeder"));
-        controlStaffList.add(new Staff("Oliver","cleaner"));
-        controlStaffList.add(new Staff("Olivia","trainer"));
+    public void initializeStaff() {
+        controlStaffList.addToFeederList(new Feeder("Tom", "feeder"));
+        controlStaffList.addToCleanerList(new Cleaner("Oliver", "cleaner"));
+        controlStaffList.addToTrainerList(new Trainer("Olivia", "trainer"));
     }
 
-    public void startNewDay(){
-        Feeding morningFeeding=new Feeding(controlDogList,controlStaffList);
+    public void startNewDay() {
+        Feeding morningFeeding = new Feeding(controlDogList, controlStaffList);
         morningFeeding.feedDogs();
 
-        VeterinarianExamination veterinarianExamination=new VeterinarianExamination(controlDogList, controlVeterinarian);
+        VeterinarianExamination veterinarianExamination = new VeterinarianExamination(controlDogList, controlVeterinarian);
         veterinarianExamination.examinateDogs();
 
-        AviaryCleaning aviaryCleaning=new AviaryCleaning(controlDogList, controlStaffList);
+        AviaryCleaning aviaryCleaning = new AviaryCleaning(controlDogList, controlStaffList);
         aviaryCleaning.cleanAviaries();
 
-        DogsMainAtivities dogsMainAtivities=new DogsMainAtivities(controlDogList, controlStaffList,controlTrainingGround);
+        DogsMainAtivities dogsMainAtivities = new DogsMainAtivities(controlDogList, controlStaffList, controlTrainingGround);
         dogsMainAtivities.doActions();
 
-        Feeding eveningFeeding=new Feeding(controlDogList,controlStaffList);
+        Feeding eveningFeeding = new Feeding(controlDogList, controlStaffList);
         eveningFeeding.feedDogs();
     }
 }
